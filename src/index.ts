@@ -142,7 +142,7 @@ export default class Mongo {
   public async findUserByUsername(
     username: string
   ): Promise<UserObjectType | null> {
-    const user = await this.collection.findOne(username);
+    const user = await this.collection.findOne({ username });
     if (user) {
       user.id = user._id;
     }
