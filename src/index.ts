@@ -142,12 +142,7 @@ export default class Mongo {
   public async findUserByUsername(
     username: string
   ): Promise<UserObjectType | null> {
-    const filter = this.options.caseSensitiveUserName
-      ? { username }
-      : {
-          $where: `obj.username && (obj.username.toLowerCase() === "${username.toLowerCase()}")`,
-        };
-    const user = await this.collection.findOne(filter);
+    const user = await this.collection.findOne(username);
     if (user) {
       user.id = user._id;
     }
